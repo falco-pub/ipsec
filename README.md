@@ -3,13 +3,12 @@ Simple IPsec container (start daemon, show status, generate CSR)
 
 ```shell
  # build ipsec image with id=core1 :
- docker build -t ipsec-core1 https://github.com/falco-pub/ipsec.git
- docker build --build-arg HOSTNAME=core1 -t ipsec-core1 https://github.com/falco-pub/ipsec.git
+ docker build -t ipsec https://github.com/falco-pub/ipsec.git
  
  # start ipsec with id=core1 
- docker run --privileged --net=host -v /mnt/alpine/ipsec/etc/ipsec.d:/etc/ipsec.d -d ipsec-core1
- # or 
- docker run -e P_IP=10.1.0.1 --privileged --net=host -v /mnt/alpine/ipsec/etc/ipsec.d:/etc/ipsec.d -d ipsec-core1
+ docker run -e HOSTNAME=core1 -e P_IP=10.1.0.1 --privileged --net=host -v /mnt/alpine/ipsec/etc/ipsec.d:/etc/ipsec.d -d ipsec
+ docker run -e HOSTNAME=core2 -e P_IP=10.1.0.2 --privileged --net=host -v /mnt/alpine/ipsec/etc/ipsec.d:/etc/ipsec.d -d ipsec
+ ...
  
  docker attach ...
 
